@@ -1,11 +1,9 @@
-import fs from "fs";
+import { read } from "../readFile";
+const input = read(2, "input.txt");
 
-const input = fs.readFileSync("input.txt", "utf8").toString().split("\n");
-const s = {};
 let acc = 0;
 for (const line of input) {
   const [first, second] = line.split(" ");
-  console.log(acc);
 
   if (second == "X") {
     acc += 1;
@@ -14,11 +12,10 @@ for (const line of input) {
   } else if (second == "Z") {
     acc += 3;
   }
-  console.log(acc);
   acc += won(first, second);
 }
 
-function won(first, second) {
+function won(first: string, second: string) {
   if (
     (first == "A" && second == "X") ||
     (first == "B" && second == "Y") ||
@@ -36,4 +33,4 @@ function won(first, second) {
   }
 }
 
-console.log(acc);
+console.log("1: " + acc);

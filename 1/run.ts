@@ -1,6 +1,7 @@
 import fs from "fs";
+import { read } from "../readFile";
 
-const input = fs.readFileSync("input.txt", "utf8").toString().split("\n");
+const input = read(1, "input.txt");
 
 const all = [];
 let acc = 0;
@@ -15,4 +16,5 @@ for (const line of input) {
 }
 const n = 3;
 const sorted = all.sort((a, b) => b - a);
-console.log(sorted.slice(0, n).reduce((a, n) => a + n, 0));
+
+console.log("1: " + sorted.slice(0, n).reduce((a, n) => a + n, 0));
