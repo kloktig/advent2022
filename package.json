@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "dev": "npx nodemon"
+    "dev": "nodemon",
+    "start": "ts-node-esm ./printBoard.ts"
   },
   "author": "",
   "license": "ISC",
