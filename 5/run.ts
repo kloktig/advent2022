@@ -1,8 +1,10 @@
 import { read } from "../readFile";
 const lines = read(5, "input.txt");
-const indexes = [1, 5, 9, 13, 17, 21, 25, 29, 33];
+const indexes = [...Array(9).keys()].map((n) => 4 * n + 1);
 const stacks: string[][] = [];
 const instructions = [];
+const t0 = performance.now();
+
 for (const _ of indexes) {
   stacks.push([]);
 }
@@ -33,5 +35,6 @@ for (const instr of instructions) {
     stacks[instr.to].push(stacks[instr.from].pop()!);
   }
 }
-
+const t1 = performance.now();
 console.log(`Run 1: ${stacks.map((v) => v.slice(-1)).join("")}`);
+console.log(`${(t1 - t0).toFixed()} ms`);
