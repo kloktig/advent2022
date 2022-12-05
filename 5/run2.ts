@@ -29,9 +29,14 @@ for (const stack of stacks) {
   stack.reverse();
 }
 for (const instr of instructions) {
+  const temp: string[] = [];
   for (let i = 0; i < instr.move; i++) {
-    stacks[instr.to].push(stacks[instr.from].pop()!);
+    temp.push(stacks[instr.from].pop()!);
+  }
+  let e = undefined;
+  while ((e = temp.pop())) {
+    stacks[instr.to].push(e);
   }
 }
 
-console.log(`Run 1: ${stacks.map((v) => v.slice(-1)).join("")}`);
+console.log(`Run 2: ${stacks.map((v) => v.slice(-1)).join("")}`);
