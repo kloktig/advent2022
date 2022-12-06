@@ -19,3 +19,6 @@ import "./5/run2";
 
 console.log("\nDay 6");
 import "./6/run";
+
+console.log("\nDay 7");
+import "./7/run";
