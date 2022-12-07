@@ -28,3 +28,7 @@ export function groupArray<T>(array: T[], n: number) {
 
   return groups;
 }
+
+export function sum(array: number[]) {
+  return array.reduce((acc, v) => acc + v);
+}
