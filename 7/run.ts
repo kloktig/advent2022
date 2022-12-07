@@ -1,7 +1,7 @@
-import { read } from "../readFile";
+import {read} from "../readFile";
 const lines = read(7, "input.txt");
 
-const a: any = { "/": { parent: "/" } };
+const a: any = {"/": {parent: "/"}};
 let currentDir: any = a["/"];
 for (const line of lines) {
   if (line.startsWith("$")) {
@@ -15,14 +15,14 @@ for (const line of lines) {
         currentDir = a["/"];
       } else {
         if (!currentDir[arg]) {
-          currentDir[arg] = { parent: currentDir };
+          currentDir[arg] = {parent: currentDir};
         }
         currentDir = currentDir[arg];
       }
     }
   } else if (line.startsWith("dir")) {
     const d = line.substring(4);
-    currentDir[d] = { parent: currentDir };
+    currentDir[d] = {parent: currentDir};
   } else if (Number.parseInt(line[0])) {
     const [size, name] = line.split(" ");
     currentDir[name] = size;
@@ -30,42 +30,50 @@ for (const line of lines) {
     currentDir.size += Number.parseInt(size);
   }
 }
+function solve1() {
+  const arr: number[] = [];
+  return {size: getSize(a), solve: arr.reduce((acc, v) => acc + v)};
 
-function pretty(obj: any, indent: number): string {
-  let s = "";
-  for (const k in obj) {
-    if (k == "parent") continue;
-    if (k == "size") continue;
-    if (typeof obj[k] == "object" && obj[k] !== null) {
-      s += "\t".repeat(indent) + k + "\n";
-      s += pretty(obj[k], indent + 1);
-    } else {
-      s += "\t".repeat(indent) + k + ":" + obj[k] + "\n";
+  function getSize(obj: any): number {
+    let s = 0;
+    for (var k in obj) {
+      if (k === "parent") continue;
+      if (k === "size") {
+        s += obj.size;
+      } else if (typeof obj[k] == "object") {
+        s += getSize(obj[k]);
+      } else {
+      }
     }
+    if (s <= 100000) arr.push(s);
+
+    return s;
   }
-  return s;
 }
-
-console.log(pretty(a, 0));
-
-const arr: number[] = [];
-console.log(getSize(a["/"]));
-console.log(arr.reduce((acc, v) => acc + v));
 
 // This function handles arrays and objects
-function getSize(obj: any): number {
-  let s = 0;
-  for (var k in obj) {
-    if (k === "parent") continue;
-    if (k === "size") {
-      s += obj.size;
-    } else if (typeof obj[k] == "object") {
-      s += getSize(obj[k]);
-    } else {
-    }
-    console.log(k + ":" + s);
-  }
-  if (s <= 100000) arr.push(s);
+function solve2() {
+  const tres = solve1().size - 40000000;
+  const arr: number[] = [];
+  solve(a);
+  return Math.min(...arr);
 
-  return s;
+  function solve(obj: any): number {
+    let s = 0;
+    for (var k in obj) {
+      if (k === "parent") continue;
+      if (k === "size") {
+        s += obj.size;
+      } else if (typeof obj[k] == "object") {
+        s += solve(obj[k]);
+      } else {
+      }
+    }
+    if (s >= tres) arr.push(s);
+
+    return s;
+  }
 }
+
+console.log("silver: " + solve1().solve);
+console.log("gold: " + solve2());
