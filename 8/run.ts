@@ -1,4 +1,4 @@
-import { read } from "../readFile";
+import {read} from "../readFile";
 
 const map: any = parse(read(8, "input.txt"));
 
@@ -7,7 +7,7 @@ function parse(lines: string[]) {
   for (const line of lines) {
     const spl = line
       .split("")
-      .map((v) => ({ heigt: Number.parseInt(v), visble: false }));
+      .map((v) => ({heigt: Number.parseInt(v), visble: false}));
     map.push(spl);
   }
   return map;
@@ -51,4 +51,6 @@ function checkVisible(i: number, j: number) {
   }
 }
 
-console.log(map.map((m: any[]) => m.filter((v) => v.visble)).flat().length);
+console.log(
+  "silver: " + map.map((m: any[]) => m.filter((v) => v.visble)).flat().length
+);
