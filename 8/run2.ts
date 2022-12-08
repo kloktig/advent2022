@@ -1,4 +1,4 @@
-import {read} from "../readFile";
+import { read } from "../readFile";
 
 const map: any = parse(read(8, "input.txt"));
 
@@ -23,7 +23,6 @@ for (let i = 0; i < map.length; i++) {
       const value = map[i - uIdx];
       if (value === undefined) break;
       upcount++;
-
       if (value[j] >= v) break;
       uIdx++;
     }
@@ -33,7 +32,6 @@ for (let i = 0; i < map.length; i++) {
     while (true) {
       const value = map[i + dIdx];
       if (value === undefined) break;
-
       downcount++;
       if (value[j] >= v) break;
       dIdx++;
@@ -45,10 +43,8 @@ for (let i = 0; i < map.length; i++) {
     while (true) {
       const value = map[i][j - lIdx];
       if (value === undefined) break;
-
       leftCount++;
       if (value >= v) break;
-
       lIdx++;
     }
 
@@ -58,7 +54,6 @@ for (let i = 0; i < map.length; i++) {
       const value = map[i][j + rIdx];
       if (value === undefined) break;
       rightcount++;
-
       if (value >= v) break;
       rIdx++;
     }
