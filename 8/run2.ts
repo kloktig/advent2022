@@ -39,7 +39,6 @@ for (let i = 0; i < map.length; i++) {
 
     let lIdx = 1;
     let leftCount = 0;
-
     while (true) {
       const value = map[i][j - lIdx];
       if (value === undefined) break;
