@@ -28,5 +28,5 @@
 // import "./8/run2";
 
 console.log("\nDay 9");
-import "./9/run";
+import "./9/run2";
 //import "./9/run";

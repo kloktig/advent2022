@@ -10,6 +10,7 @@ function parse(lines: string[]) {
   }
   return d;
 }
+
 type Pos = { x: number; y: number };
 let H = { x: 0, y: 0 };
 let T = { x: 0, y: 0 };
@@ -48,30 +49,38 @@ function diff(a: Pos, b: Pos) {
     )
   );
 }
+//console.log(visited);
+//console.log(`silver: ${visited.size}`);
 
-let maxX = 0;
-let maxY = 0;
-let minX = 0;
-let minY = 0;
-const visitedArr: Pos[] = Array.from(visited).map((v) => JSON.parse(v) as Pos);
+//printKnot(visited);
 
-for (const p of visitedArr) {
-  if (p.x > maxX) maxX = p.x;
-  if (p.y > maxY) maxY = p.y;
-  if (p.x < minX) minX = p.x;
-  if (p.y < minY) minY = p.y;
-}
+export function printKnot(visited: Set<string>) {
+  let maxX = 0;
+  let maxY = 0;
+  let minX = 0;
+  let minY = 0;
+  const visitedArr: Pos[] = Array.from(visited).map(
+    (v) => JSON.parse(v) as Pos
+  );
 
-let str = "";
-for (let y = maxY; y >= minY; y--) {
-  for (let x = minY; x <= maxX; x++) {
-    str += visitedArr.filter((p) => p.x === x && p.y === y).length
-      ? x === 0 && y === 0
-        ? "S"
-        : "#"
-      : ".";
+  for (const p of visitedArr) {
+    if (p.x > maxX) maxX = p.x;
+    if (p.y > maxY) maxY = p.y;
+    if (p.x < minX) minX = p.x;
+    if (p.y < minY) minY = p.y;
   }
-  str += "\n";
+
+  let str = "";
+  for (let y = maxY + 1; y >= minY - 1; y--) {
+    for (let x = minY - 1; x <= maxX + 1; x++) {
+      str += visitedArr.filter((p) => p.x === x && p.y === y).length
+        ? x === 0 && y === 0
+          ? "S"
+          : "#"
+        : ".";
+    }
+    str += "\n";
+  }
+
+  console.log(str);
 }
-console.log(visited);
-console.log(`silver: ${visited.size}`);
