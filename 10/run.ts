@@ -1,11 +1,9 @@
-import { stat } from "fs";
 import { read } from "../readFile";
 
 const data: any = parse(read(10, "input.txt"));
-console.log(calculateSum(getRegisterStates()));
+console.log("Siver:" + calculateSum(getRegisterStates()));
 
 function calculateSum(state: number[]) {
-  console.log(state);
   let sum = 0;
   for (const n of [20, 60, 100, 140, 180, 220]) {
     sum += state[n - 1] * n;
@@ -13,7 +11,7 @@ function calculateSum(state: number[]) {
   return sum;
 }
 
-function getRegisterStates() {
+export function getRegisterStates() {
   let state = [1];
   let x = 1;
   for (const instruction of data) {
@@ -26,7 +24,7 @@ function getRegisterStates() {
   return state;
 }
 
-function parse(lines: string[]) {
+export function parse(lines: string[]) {
   const d = [];
   for (const line of lines) {
     const [op, value] = line.split(" ");
