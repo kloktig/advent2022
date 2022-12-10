@@ -27,10 +27,10 @@
 // import "./8/run";
 // import "./8/run2";
 
-// console.log("\nDay 9");
-// import "./9/run2";
+console.log("\nDay 9");
 //import "./9/run";
+import "./9/run2";
 
-console.log("\nDay 10");
-import "./10/run";
-import "./10/run2";
+// console.log("\nDay 10");
+// import "./10/run";
+// import "./10/run2";
